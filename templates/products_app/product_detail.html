@@ -1,0 +1,481 @@
+{% extends 'main_template.html' %}
+{% load render_partial %}
+
+<!-- search kon alamate comment ro --> <!---->
+{% block title %}
+    Product Detail                                              
+{% endblock  %}
+
+{% block content %}
+<div class="site__body">
+    <div class="page-header">
+        <div class="page-header__container container">
+            <div class="page-header__breadcrumb">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/">Home /</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#">Products &nbsp;</a>
+                            / &nbsp;
+                        </li>
+                        <li class="active" aria-current="page">
+                            <a href="/products/ProductDetail/{{product.product_name}}/"> {{product.product_name}}</a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="block">
+        <div class="container">
+            <div class="product product--layout--columnar" data-layout="columnar">
+                <div class="product__content">
+                    <!-- .product__gallery -->
+                    <div class="product__gallery">
+                        <div class="product-gallery">
+                            <div class="product-gallery__featured">
+                                <div class="owl-carousel" id="product-image">
+                                    <div>
+                                        <img src="{{media_url}}{{product.image_name}}" alt="#"> 
+                                    </div>        <!---->
+                                    {% for img in product.gallery_images.all %}                        <!---->
+                                        <a href="#" target="_blank">
+                                            <img src="{{media_url}}{{img.image_name}}" alt="">
+                                        </a>
+                                    {% endfor %}
+                                  
+                                </div>
+                            </div>
+                            <div class="product-gallery__carousel">
+                                <div class="owl-carousel" id="product-carousel">
+                                    <a href="#" class="product-gallery__carousel-item">
+                                        <img class="product-gallery__carousel-image" src="{{media_url}}{{product.image_name}}" alt="#"> 
+                                    </a>
+                                    
+                                    {% for img in product.gallery_images.all %}                                         <!----> <!-- 2ta table ke Fk beyneshun hast ro darim -->
+                                        <a href="#" class="product-gallery__carousel-item">
+                                            <img class="product-gallery__carousel-image" src="{{media_url}}{{img.image_name}}" alt="#">     <!----> <!-- az table Fk estefade kardim -->
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- .product__gallery / end -->
+                    <!-- .product__info -->
+                    <div class="product__info">
+                        <!-- favorite -->
+                        <div class="product__wishlist-compare">
+                            {% if user.is_authenticated %}
+                                {% if product.get_user_favorite %}
+                                    <button id="btn_{{product.id}}" class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button" onclick="removeFromFavorites({{product.id}})" >     <!-- calling Ajax function -->
+                                        <i id="icon_{{product.id}}" class="fa fa-heart redHeart"></i>
+                                        <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                                    </button>
+                                {% else %}
+                                    <button id="btn_{{product.id}}" class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button" onclick="addToFavorites({{product.id}})">    <!-- calling Ajax function -->
+                                        <i id="icon_{{product.id}}" class="fa fa-heart-broken"></i>
+                                        <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                                    </button>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        <!-- /favorite -->
+                        <h1 class="product__name"> {{product.product_name}}</h1>                    <!---->
+                        <div class="product__rating">
+                            <div class="product__rating-stars">
+                                <div class="rating">
+                                    <div class="rating__body">
+                                        <svg class="rating__star rating__star--active" width="13px" height="12px">
+                                            <g class="rating__fill">
+                                                <use xlink:href="images/sprite.svg#star-normal"></use>
+                                            </g>
+                                            <g class="rating__stroke">
+                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
+                                            </g>
+                                        </svg>
+                                        <div class="rating__star rating__star--only-edge rating__star--active">
+                                            <div class="rating__fill">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                            <div class="rating__stroke">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                        </div>
+                                        <svg class="rating__star rating__star--active" width="13px" height="12px">
+                                            <g class="rating__fill">
+                                                <use xlink:href="images/sprite.svg#star-normal"></use>
+                                            </g>
+                                            <g class="rating__stroke">
+                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
+                                            </g>
+                                        </svg>
+                                        <div class="rating__star rating__star--only-edge rating__star--active">
+                                            <div class="rating__fill">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                            <div class="rating__stroke">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                        </div>
+                                        <svg class="rating__star rating__star--active" width="13px" height="12px">
+                                            <g class="rating__fill">
+                                                <use xlink:href="images/sprite.svg#star-normal"></use>
+                                            </g>
+                                            <g class="rating__stroke">
+                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
+                                            </g>
+                                        </svg>
+                                        <div class="rating__star rating__star--only-edge rating__star--active">
+                                            <div class="rating__fill">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                            <div class="rating__stroke">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                        </div>
+                                        <svg class="rating__star rating__star--active" width="13px" height="12px">
+                                            <g class="rating__fill">
+                                                <use xlink:href="images/sprite.svg#star-normal"></use>
+                                            </g>
+                                            <g class="rating__stroke">
+                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
+                                            </g>
+                                        </svg>
+                                        <div class="rating__star rating__star--only-edge rating__star--active">
+                                            <div class="rating__fill">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                            <div class="rating__stroke">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                        </div>
+                                        <svg class="rating__star rating__star--active" width="13px" height="12px">
+                                            <g class="rating__fill">
+                                                <use xlink:href="images/sprite.svg#star-normal"></use>
+                                            </g>
+                                            <g class="rating__stroke">
+                                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
+                                            </g>
+                                        </svg>
+                                        <div class="rating__star rating__star--only-edge rating__star--active">
+                                            <div class="rating__fill">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                            <div class="rating__stroke">
+                                                <div class="fake-svg-icon"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="product__description">
+                            {% autoescape off %}                        <!----> <!-- autoescape causes the style which we inserted in Admin page remain -->
+                                {{product.description}}                 <!---->
+                            {% endautoescape %}
+                        </div>
+
+                        <ul class="product__meta">
+                            <li>Availability: 
+                                <span>
+                                    {% if product.get_number_in_warehouse <= 0 %}                              <!-- ref to product model this func -->
+                                        <span> Out of Stock</span>
+                                    {% else %}
+                                        Available
+                                    {% endif %}
+                                </span>
+                            </li>
+                            <li>Brand: <a href=""> {{product.brand}} </a></li>                       <!---->
+                            <li>Comments: <a href="">{{product.product_comments.all|length}}</a> comment</li>           <!---->
+                            
+
+                        </ul>
+                    </div>
+                    <!-- .product__info / end -->
+                    <!-- .product__sidebar -->
+                    <div class="product__sidebar">
+                        <!-- Available -->
+                        <div class="product__availability">Availibility: 
+                            <span class="text-success">
+                                {% if product.get_number_in_warehouse <= 0 %}                              <!-- ref to product model this func -->
+                                <span> Out of Stock</span>
+                                {% else %}
+                                Available
+                                {% endif %}
+                            </span>
+                        </div>
+                        <!-- /Available -->
+                        <div class="product__prices">{{product.price}} $$</div>         <!---->
+                        <!-- .product__options -->
+                        <form class="product__options">
+                            <div class="form-group product__option">
+                                <label class="product__option-label">Color</label>
+                                <div class="input-radio-color">
+                                    <div class="input-radio-color__list">
+                                        <label class="input-radio-color__item input-radio-color__item--white" style="color: #fff;" data-toggle="tooltip" data="White">
+                                            <input type="radio" name="color"> <span></span>
+                                        </label>
+                                        <label class="input-radio-color__item" style="color: #ffd333;" data-toggle="tooltip" data="Yellow">
+                                            <input type="radio" name="color"> <span></span>
+                                        </label>
+                                        <label class="input-radio-color__item" style="color: #ff4040;" data-toggle="tooltip" data="Red">
+                                            <input type="radio" name="color"> <span></span>
+                                        </label>
+                                        <label class="input-radio-color__item input-radio-color__item--disabled" style="color: #4080ff;" data-toggle="tooltip" data="Blue">
+                                            <input type="radio" name="color" disabled> <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="form-group product__option">
+                                <label class="product__option-label">Features</label>
+                                <div class="input-radio-label">
+                                    <div class="input-radio-label__list">
+                                        {% for feature in product.product_features.all %}              <!-- vaghti Fk mizanim be har 2ta table dastresi darim -->
+                                        <label>
+                                            <input type="radio" name="material">
+                                            <span>{{feature.feature}}: {{feature.value}} </span>       <!-- feature.feature = feature.feature.feature_name --> 
+                                        </label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group product__option">
+                                <label class="product__option-label" for="product-quantity">Number</label>
+                                <div class="product__actions">
+                                    <div class="product__actions-item">
+                                        <div class="input-number product__quantity">
+                                            <input id="product-quantity" class="input-number__input form-control form-control-lg" type="number" min="1" value="1">  <!---->
+                                        </div>
+                                    </div>
+                                    <div class="product__actions-item product__actions-item--addtocart">
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="add_to_shop_cart({{product.id}},0)">Add</button>     <!-- because we input 0, then it takes value of id="product-quantity" -->
+                                    </div>
+                                    <div class="product__actions-item product__actions-item--wishlist">
+                                        <button type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Wishlist">
+                                            <svg width="16px" height="16px">
+                                                <use xlink:href="images/sprite.svg#wishlist-16"></use>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="product__actions-item product__actions-item--compare">
+                                        <button type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="Compare">
+                                            <svg width="16px" height="16px">
+                                                <use xlink:href="images/sprite.svg#compare-16"></use>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- .product__options / end -->
+                    </div>
+                    <!-- .product__end -->
+                    <div class="product__footer">
+                        <div class="product__share-links share-links">
+                            <ul class="share-links__list">
+                                <li class="share-links__item share-links__item--type--like" style="font-size: 1.3rem;">
+                                    <a href="#" style="border-radius: 5%;">Share It</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a onclick="addToCompareList({{product.id}},{{product.getMainProductGroup}})" class="compare" style="cursor:pointer;">          <!-- hrefesh ro bar midarim -->
+                            <i class="fas fa-compress-arrows-alt" style="margin-top: 4px;">&nbsp; compare</i>
+                        </a>
+                    </div>
+                    
+                    <div style="display:flex; justify_content: space-between">
+                        <h6>Average Score: <span style="color: red;">{{product.get_average_score}}</span></h6>          <!---->
+
+                        {% if user.is_authenticated %}                                      <!---->
+                            {% if product.get_user_score > 0 %}
+                                <div>
+                                    {% with ''|center:5 as range %}                             <!-- baraye inke loope 5tayi benevisim injuri mishe -->
+                                        {% for i in range %}
+                                            {% if forloop.counter <= product.get_user_score %}          <!-- forloop.counter yek dade sabet hast. counter hast. 1,2,3,4,5 -->
+                                                <span id="star_{{forloop.counter}}" class="fa fa-star checked"></span>
+                                            {% else %}
+                                                <span id="star_{{forloop.counter}}" class="fa fa-star"></span>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endwith %}
+                                </div>
+                            {% else %}
+                                <div>
+                                    {% with ''|center:5 as range %}                                 
+                                        {% for i in range %}                                            <!---->
+                                            <span id="star_{{forloop.counter}}" class="fa fa-star cursor-pointer" onclick="addScore({{forloop.counter}},{{product.id}})"></span>        <!---->
+                                        {% endfor %}
+                                    {% endwith %}
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                
+                </div>
+            </div>
+            <div class="product-tabs">
+                <div class="product-tabs__list"><a href="#tab-description" class="product-tabs__item product-tabs__item--active">Description<a> <a href="#tab-reviews" class="product-tabs__item">Comments</a></div>      <!-- #ref12 -->
+                <div class="product-tabs__content">
+                    <div class="product-tabs__pane product-tabs__pane--active" id="tab-description">
+                        <div class="typography">
+                            <h3>Summary Description</h3>
+                            <div style="text-align:center;">                            <!----> <!-- dasti bayad style bedi -->
+                                {{product.summary_description}}                         <!---->
+                            </div>
+                            <h3 class="primary-font">Information</h3>
+                            <p> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur suscipit facere ratione aliquid, laborum voluptatum, eius assumenda delectus consequatur atque, eum distinctio. Unde, aliquid nam voluptas distinctio necessitatibus commodi cupiditate amet nostrum asperiores! Quibusdam vero quidem illum animi ipsa iure quasi aspernatur explicabo. Non repellat ullam repudiandae esse omnis vitae culpa sint, suscipit sapiente aliquam, nam iusto voluptatum earum, et dolor reiciendis ex neque cupiditate quidem illum! Nulla maiores dignissimos illum. Blanditiis voluptatibus quam omnis architecto ratione similique in? Laudantium quidem voluptatem necessitatibus, consequatur quam quas nisi vero ad facilis officia! Beatae nulla culpa corporis deleniti unde laborum magni sunt inventore amet alias eaque officia eos, iusto facilis est reiciendis totam recusandae quasi! Deleniti ipsum optio repellendus maiores eveniet molestiae iure porro atque inventore, nisi a nobis laboriosam quis! Voluptatibus et non atque iusto nostrum quibusdam amet culpa aliquid magnam corrupti, assumenda, qui porro reiciendis. Ex repellendus nobis itaque quibusdam!</p>
+                        </div>
+                    </div>
+
+                    <div class="product-tabs__pane" id="tab-reviews">           <!-- #ref12 -->
+                        <div class="reviews-view">
+                            <div class="reviews-view__list">
+
+                                <h3 class="reviews-view__header">Comments </h3>
+                                <div class="reviews-list">
+                                    <ol class="reviews-list__content">
+                                        {% for comment in product.product_comments.all %}       <!-- be jadvale product => product_comment ezafe shode -->
+                                            {% if comment.is_active %}                          <!---->
+                                                {% if comment.comment_parent == None %}                  <!-- yek sub comment bishtar nemishe -->
+                                                    <li class="reviews-list__item" style="display:flex; justify_content: space-between;">
+                                                        <div class="review">
+                                                            <div class="review__avatar">
+                                                                <img src="{{media_url}}images/avatars/avatar-2.jpg" alt="">
+                                                            </div>
+                                                            <div class="review__content">
+                                                                <div class="review__author">{{comment.commenting_user}}</div>             <!---->
+                                                                
+                                                                <div class="review__text">{{comment.comment_text}}</div>                  <!---->
+                                                                <div class="review__date">{{comment.registerdate}} </div>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            {% if user.is_authenticated %}                                      <!---->
+                                                                <div>
+                                                                    <a class="btn btn-info" id="btn_{{comment.id}}" onclick="showCreateCommentForm({{product.id}},{{comment.id}},'{{product.slug}}')">         <!-- comment.id ro mibarim ke bedunim parent in comment kiye--> <!-- id haro injuri besaz. chon product.slug str hast bayad '{}' -->
+                                                                        Response
+                                                                    </a>
+                                                                </div>
+                                                                <div id="comment_form_{{comment.id}}">              <!-- injuri hamishe id bede -->
+                                                                                                                    <!-- harvaght button bala(<a>) click beshe inja ba ajax form ro miyare  -->
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    </li>
+                                                    
+                                                    <!-- Each object in Comment model, has extra record named child_comments -->
+                                                    {% for item in comment.child_comments.all %}                 <!-- It has foriegn key to itself. Look at models.py => Comment class => comment_parent -->
+                                                        {% if item.is_active %}
+                                                            <li class="reviews-list__item" style="background-color: beige; width: 95%; margin: 10px 5%;">
+                                                                <div class="review">
+                                                                    <div class="review__avatar">
+                                                                        <img src="{{media_url}}images/avatars/avatar-4.jpg" alt="">
+                                                                    </div>
+                                                                    <div class="review__content">
+                                                                        <div class="review__author">{{item.commenting_user.name}}</div>
+                                                                        <div class="review__text">{{item.comment_text}}</div>
+                                                                        <div class="review__date">{{item.registerdate}}</div>
+                                                                    </div>
+                                                                </div>    
+                                                            </li>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                            
+                                        {% endfor %}
+                                    </ol>
+                                </div>
+                                {% if user.is_authenticated %}                        <!---->
+                                        <h3 class="reviews-view__header">Write your comment here</h3>
+                                        <div class="row">
+                                            <div class="col-12 col-lg-9 col-xl-8">
+                                                {% render_partial 'csf:create_comment' slug=product.slug %}         <!-- be sorate 'GET' mifreste, dade productId va commentId ro nemifreste -->
+                                            </div>
+                                        </div>
+                                {% else %}
+                                        <h5> you have to login
+                                            <a href="{% url 'accounts:login' %}?next=/products/ProductDetail/{{product.slug}}"> Login</a>               <!-- next bade login dobare miyaratesh hamun safheke bud -->
+                                            or
+                                            <a href="{% url 'accounts:register' %}?next=/products/ProductDetail/{{product.slug}}"> Register</a>
+                                        </h5>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .block-products-carousel -->
+    <div class="block block-products-carousel" data-layout="grid-5">
+        <div class="container">
+            <div class="block-header">
+                <h3 class="block-header__title">Related Products</h3>
+                <div class="block-header__divider"></div>
+                <div class="block-header__arrows-list">
+                    <button class="block-header__arrow block-header__arrow--left" type="button">
+                        <svg width="7px" height="11px">
+                            <use xlink:href="images/sprite.svg#arrow-rounded-left-7x11"></use>
+                        </svg>
+                    </button>
+                    <button class="block-header__arrow block-header__arrow--right" type="button">
+                        <svg width="7px" height="11px">
+                            <use xlink:href="images/sprite.svg#arrow-rounded-right-7x11"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            {% render_partial 'products:related_products' slug=product.slug %}                            <!----> <!-- data ham ba khodesh mibare. error => slug= product.slug -->
+            
+            {% comment %} <div class="block-products-carousel__slider">
+                <div class="block-products-carousel__preloader"></div>
+                <div class="owl-carousel">
+                    <div class="block-products-carousel__column">
+                        <div class="block-products-carousel__cell">
+                            <div class="product-card">
+                                <div class="product-card__badges-list">
+                                    <div class="product-card__badge product-card__badge--new">جدید</div>
+                                </div>
+                                <div class="product-card__image">
+                                    <a href="product.html">
+                                        <img src="https://picsum.photos/700/700" alt="">
+                                    </a>
+                                </div>
+                                <div class="product-card__info">
+                                    <div class="product-card__name"><a href="product.html">اره برقی برندیکس مدل 300 وات</a></div>
+                                </div>
+                                <div class="product-card__actions">
+                                    <div class="product-card__availability">موجودی: <span class="text-success">موجود در انبار</span></div>
+                                    <div class="product-card__prices">749,000 تومان</div>
+                                    <div class="product-card__buttons">
+                                        <button class="btn btn-primary product-card__addtocart" type="button">
+                                            افزودن به سبد
+                                        </button>
+                                        <button	class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"  type="button">
+                                            <i class="fa fa-heart"></i>
+                                            <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                                        </button>
+                                        <button	class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"  type="button">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div> {% endcomment %}
+        </div>
+    </div>
+    <!-- .block-products-carousel / end -->
+</div>
+{% endblock  %}

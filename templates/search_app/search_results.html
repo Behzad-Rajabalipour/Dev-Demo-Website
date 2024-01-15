@@ -1,0 +1,23 @@
+{% extends 'main_template.html' %}
+{% load render_partial %}
+
+{% block title %}
+    Search
+{% endblock  %}
+
+{% block content %}
+    {% if products %}
+        <div class="">
+            <div class="container">
+                <h2 style="text-align: center;"> Search Result </h2>
+                <div class="product-flexbox">
+                    {% include 'partials/Products.html' with type=1 %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container" style="padding: 100px;">
+            <h3 style="text-align: center; color:red"> No Result Found </h3>
+        </div>
+    {% endif %}
+{% endblock %}

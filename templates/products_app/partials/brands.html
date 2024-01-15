@@ -1,0 +1,22 @@
+{% load humanize %}
+
+<div class="widget-filters__item">
+    <div class="filter filter--opened" data-collapse-item>                                  <!-- item -->
+        <button type="button" class="filter__title" data-collapse-trigger>Brand              <!-- trigger -->
+            <svg class="filter__arrow" width="12px" height="7px">
+                <use xlink:href="images/sprite.svg#arrow-rounded-down-12x7"></use>
+            </svg>
+        </button>
+        <div class="filter__body" data-collapse-content>                                     <!-- content -->
+            <div class="filter__container">
+                {% for brand in brands %}
+                    <input id="item1_{{brand.id}}" type="checkbox" name="brand" value="{{brand.id}}"  >
+                    <span class="filter-list__title">{{brand.brand_title}}</span>
+                    {% comment %} <span class="filter-list__counter">{{brand.products_brand.all|length}}</span> {% endcomment %}    <!-- it shows all the products with this brand, It doesn't consider current_group -->
+                    <span class="filter-list__counter">{{brand.count}}</span>   <!-- It considers products that have this brand and this current_group -->
+                    <br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

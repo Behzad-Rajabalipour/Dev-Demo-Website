@@ -1,0 +1,31 @@
+{% load humanize %}
+<div class="dashboard__orders card">
+    <div class="card-header">
+        <h5>Last Orders</h5>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-table">
+        <div class="table-responsive-sm">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order Id</th>
+                        <th>Register Date</th>
+                        <th>state</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{order.id}}</td>
+                            <td>{{order.register_date}}</td>
+                            <td>{{order.order_state}}</td>                                      <!-- order_state baraye ine ke neshun bede kodom marhale delivery hast -->
+                            <td>{{order.get_order_total_price|intcomma}} $</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

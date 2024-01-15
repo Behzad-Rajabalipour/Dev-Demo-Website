@@ -1,0 +1,286 @@
+{% extends 'main_template.html' %}
+{% load render_partial %}
+
+{% block title %}
+    Main Page
+{% endblock  %}
+
+{% block content %}
+<div class="site__body">
+    
+    <!-- .block-slideshow -->
+
+    {% render_partial 'main:sliders' %}                     <!---->
+
+    <!-- .block-slideshow / end -->
+    <!-- .block-features -->
+    <div class="block block-features block-features--layout--boxed">
+        <div class="container">
+            <div class="block-features__list">
+                <div class="block-features__item">
+                    <div class="block-features__icon">
+                        <i class="fa fa-list"></i>
+                    </div>
+                    <div class="block-features__content">
+                        <div class="block-features__title">Free Delivery</div>
+                        <div class="block-features__subtitle">Enter Your Address</div>
+                    </div>
+                </div>
+                <div class="block-features__divider"></div>
+                <div class="block-features__item">
+                    <div class="block-features__icon">
+                        <i class="fa fa-list"></i>
+                    </div>
+                    <div class="block-features__content">
+                        <div class="block-features__title">Customers Service</div>
+                        <div class="block-features__subtitle">Contact Us</div>
+                    </div>
+                </div>
+                <div class="block-features__divider"></div>
+                <div class="block-features__item">
+                    <div class="block-features__icon">
+                        <i class="fa fa-list"></i>
+                    </div>
+                    <div class="block-features__content">
+                        <div class="block-features__title">Scure Payment</div>
+                        <div class="block-features__subtitle">Redirect to Secure Payment Gate</div>
+                    </div>
+                </div>
+                <div class="block-features__divider"></div>
+                <div class="block-features__item">
+                    <div class="block-features__icon">
+                        <i class="fa fa-list"></i>
+                    </div>
+                    <div class="block-features__content">
+                        <div class="block-features__title">Discounts</div>
+                        <div class="block-features__subtitle">Up to 40%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .block-features / end -->
+    <!-- .block-products-carousel -->
+        {% render_partial 'products:cheapest_products' %}
+    <!-- .block-products-carousel / end -->
+    <!-- .block-banner -->
+    <div class="block block-banner">
+        <div class="container">
+            <a href="" class="block-banner__body">
+                <div class="block-banner__image block-banner__image--desktop" style="background-image: url('https://picsum.photos/1110/170')"></div>
+                <div class="block-banner__image block-banner__image--mobile" style="background-image: url('https://picsum.photos/510/390')"></div>
+                <div class="block-banner__title">
+                    Asus Gaming Laptop
+                    <br class="block-banner__mobile-br">
+                </div>
+                <div class="block-banner__text">Best for you</div>
+                <div class="block-banner__button"><span class="btn btn-sm btn-primary">Buy Now</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!-- .block-banner / end -->
+    <!-- .block-products -->
+    <div class="block block-products block-products--layout--large-last">
+        <div class="container">
+            <div class="block-header">
+                <h3 class="block-header__title">Most Purchased Laptops</h3>
+                <div class="block-header__divider"></div>
+            </div>
+            <div class="block-products__body">
+                <div class="block-products__list">
+                    {% render_partial "products:most_purchased_products" %}
+                </div> 
+                    <div class="block-products__featured">
+                    <div class="block-products__featured-item">
+                        <div class="product-card">
+
+                            <div class="product-card__badges-list">
+                                <div class="product-card__badge product-card__badge--new">New</div>
+                            </div>
+                            <div class="product-card__image">
+                                <a href="product.html">
+                                    <img src="{{media_url}}laptop8.jpg" alt="#">
+                                </a>
+                            </div>
+                            <div class="product-card__info">
+                                <div class="product-card__name">
+                                    <a href="product.html" style="font-size: 25px;">
+                                        Hp Laptop
+                                    </a>
+                                </div>
+
+                            </div>
+                            <div class="product-card__actions">
+                                <div class="product-card__availability">Availibility: <span class="text-success">Available</span></div>
+                                <div class="product-card__prices" style="text-align: center;">2000$ Dollar</div>
+                                <div class="product-card__buttons">
+                                    <button class="btn btn-primary product-card__addtocart" type="button">
+                                        Asus Laptop
+                                    </button>
+                                    <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button">
+                                        <i class="fa fa-heart"></i>
+                                        <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                                    </button>
+                                    <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+    <!-- .block-products / end -->
+    <!-- .block-categories -->
+    {% render_partial "products:popular_productGroups" %}
+    <!-- .block-categories / end -->
+    <!-- .block-products-carousel -->
+    {% render_partial "products:last_products" widget=False %}
+    <!-- .block-products-carousel / end -->
+    <!-- .block-posts -->
+    <div class="block block-posts block-posts--layout--grid-nl" data-layout="grid-nl">
+        <div class="container">
+            <div class="block-header">
+                <h3 class="block-header__title">Last Articles</h3>
+                <div class="block-header__divider"></div>
+                <div class="block-header__arrows-list">
+                    <button class="block-header__arrow block-header__arrow--left" type="button">
+                        <i class="fas fa-angle-left"></i>
+                    </button>
+                    <button class="block-header__arrow block-header__arrow--right" type="button">
+                        <i class="fas fa-angle-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="block-posts__slider">
+                <div class="owl-carousel owl-rtl owl-loaded owl-drag">
+                                                                                                           
+                    
+                <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(1900px, 0px, 0px); transition: all 0s ease 0s; width: 7600px;"><div class="owl-item cloned" style="width: 350px; margin-left: 30px;"><div class="post-card">
+                        <div class="post-card__image">
+                            <a href="">
+                                <img src="{{media_url}}laptop1.avif" alt="">
+                            </a>
+                        </div>
+                        <div class="post-card__info">
+                            <div class="post-card__category"><a href="">Suggestion</a></div>
+                            <div class="post-card__name"><a href="">Article 1</a></div>
+                            <div class="post-card__date">21 August 2021</div>
+                            <div class="post-card__content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non hic soluta vel ducimus quae nihil eaque deleniti quia rerum cupiditate. Consectetur facilis exercitationem velit deserunt modi temporibus ex aut nam nobis nemo dolores, voluptate architecto.</div>
+                            <div class="post-card__read-more"><a href="" class="btn btn-secondary btn-sm">Read More</a></div>
+                        </div>
+                    </div></div><div class="owl-item cloned" style="width: 350px; margin-left: 30px;"><div class="post-card">
+                        <div class="post-card__image">
+                            <a href="">
+                                <img src="{{media_url}}laptop2.avif" alt="">
+                            </a>
+                        </div>
+                        <div class="post-card__info">
+                            <div class="post-card__category"><a href="">Suggestion</a></div>
+                            <div class="post-card__name"><a href="">Article 2</a></div>
+                            <div class="post-card__date">18 September 2019</div>
+                            <div class="post-card__content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dicta eveniet illum voluptatibus ea laudantium atque error rem et tempore! Nesciunt veniam vero optio nisi assumenda voluptates, nobis sequi qui.</div>
+                            <div class="post-card__read-more"><a href="" class="btn btn-secondary btn-sm">Read More</a></div>
+                        </div>
+                    </div></div><div class="owl-item cloned" style="width: 350px; margin-left: 30px;"><div class="post-card">
+                        <div class="post-card__image">
+                            <a href="">
+                                <img src="{{media_url}}laptop3.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="post-card__info">
+                            <div class="post-card__category"><a href="">Suggestion</a></div>
+                            <div class="post-card__name"><a href="">Article 3</a></div>
+                            <div class="post-card__date">05 October 2018</div>
+                            <div class="post-card__content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, sequi voluptates veniam voluptate veritatis itaque repellendus quam dolorem necessitatibus minus ut, placeat odit possimus et?</div>
+                            <div class="post-card__read-more"><a href="" class="btn btn-secondary btn-sm">Read More</a></div>
+                        </div>
+                    </div></div><div class="owl-item active" style="width: 350px; margin-left: 30px;"><div class="post-card">
+                        <div class="post-card__image">
+                            <a href="">
+                                <img src="{{media_url}}laptop4.jpeg" alt="#">
+                            </a>
+                        </div>
+                        <div class="post-card__info">
+                            <div class="post-card__category"><a href="">Suggestion</a></div>
+                            <div class="post-card__name"><a href="">Article 4</a></div>
+                            <div class="post-card__date">12 May 2017</div>
+                            <div class="post-card__content"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, obcaecati quis. Eum officia ipsa non doloribus suscipit quia voluptatum.</div>
+                            <div class="post-card__read-more"><a href="" class="btn btn-secondary btn-sm">بیشتر
+                                    بخوانید</a></div>
+                        </div>
+                    </div></div><div class="owl-item" style="width: 350px; margin-left: 30px;"><div class="post-card">
+                        <div class="post-card__image">
+                            <a href="">
+                                <img src="{{media_url}}laptop5.jpeg" alt="#">
+                            </a>
+                        </div>
+                        <div class="post-card__info">
+                            <div class="post-card__category"><a href="">Suggestion</a></div>
+                            <div class="post-card__name"><a href="">Article 5</a></div>
+                            <div class="post-card__date">30 March 2017</div>
+                            <div class="post-card__content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, reiciendis laborum animi error voluptas minima.</div>
+                            <div class="post-card__read-more"><a href="" class="btn btn-secondary btn-sm">Read More</a></div>
+                        </div>
+                    
+                    </div></div></div></div><div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><span aria-label="Previous">‹</span></button><button type="button" role="presentation" class="owl-next"><span aria-label="Next">›</span></button></div><div class="owl-dots disabled"></div></div>
+            </div>
+        </div>
+    </div>
+    <!-- .block-posts / end -->
+    <!-- .block-brands -->
+
+    <div class="block block-brands">
+        <div class="container">
+            <div class="block-brands__slider">
+                <div class="owl-carousel owl-rtl owl-loaded owl-drag">
+
+                <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(1106px, 0px, 0px); transition: all 0s ease 0s; width: 3503px;"><div class="owl-item cloned" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/08f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item cloned" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/a7f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item cloned" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/06f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item cloned" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/e5f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item cloned" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/04f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item cloned" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/f3f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item active" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/79f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item active" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/08f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item active" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/a7f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item active" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/06f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item active" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/e5f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item active" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/04f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item active" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/f3f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item cloned" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/79f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item cloned" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/08f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item cloned" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/a7f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item cloned" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/06f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item cloned" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/e5f.png/fff" alt=""></a>
+                    </div></div><div class="owl-item cloned" style="width: 184.333px;"><div class="block-brands__item">
+                        <a href=""><img src="https://via.placeholder.com/380x80/04f.png/fff" alt=""></a>
+                    </div></div></div></div><div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><span aria-label="Previous">‹</span></button><button type="button" role="presentation" class="owl-next"><span aria-label="Next">›</span></button></div><div class="owl-dots disabled"></div></div>
+            </div>
+        </div>
+    </div>
+    <!-- .block-brands / end -->
+</div>
+{% endblock  %}

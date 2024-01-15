@@ -1,0 +1,53 @@
+<header class="site__header d-lg-block d-none">
+    <div class="site-header">
+        <!-- .topbar -->
+        <div class="site-header__topbar topbar">
+            <div class="topbar__container container">
+                <div class="topbar__row">
+                    <div class="topbar__item">
+                        {% if user.is_authenticated %}                                <!-- age user authenticated hast ino biyar -->
+                            <div class="topbar-dropdown">
+                                <button class="topbar-dropdown__btn" type="button">
+                                    <a href="{% url 'accounts:userpanel' %}" class="topbar-link">User Panel</a>
+                                    <i class="fa fa-user"></i>
+                                </button>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="topbar__spring"></div>
+                    <div class="topbar__item topbar__item--link"><a class="topbar-link"
+                            href="#">About Us</a></div>
+                    <div class="topbar__item topbar__item--link"><a class="topbar-link"
+                            href="#">Contact Us</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-header__middle container">
+            <div class="site-header__logo">
+                <a href="index.html" >
+                    <img src="/media/images/behzad.png" alt="#" class="img-180x50">    <!-- src="/" don't forget / at the begining -->
+                </a>
+            </div>
+
+            <div class="site-header__search">
+                <div class="search">
+                    <form class="search__form" action="{% url 'search:search_view' %}" method="GET">
+                        <input class="search__input" name="q" placeholder="Search Product"
+                            aria-label="Site search" type="text" autocomplete="off">            <!-- name="q" -->
+                        <button class="search__button" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        <div class="search__border"></div>
+                    </form>
+                </div>
+            </div>
+            <div class="site-header__phone">
+                <div class="site-header__phone-title">IT</div>
+                <div class="site-header__phone-number"><span class="ltr_text">604-857-6985</span></div>
+            </div>
+        </div>
+        {% include "partials/navbar.html" %}                                <!---->
+    </div>
+</header>
+

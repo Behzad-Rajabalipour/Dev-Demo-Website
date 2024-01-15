@@ -1,0 +1,55 @@
+{% extends 'main_template.html' %}
+
+{% block title %} Verification  {% endblock title %}
+
+{% block content %}
+    <form action="" method="post">
+        		<!-- site__body -->
+		<div class="site__body">
+			<div class="page-header">
+				<div class="page-header__container container">
+					<div class="page-header__breadcrumb">
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html">Home</a>
+									/
+								</li>
+								<li class="breadcrumb-item">
+									<a href="#">Account</a>
+									/
+								</li>
+								<li class="active" aria-current="page">Register</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="page-header__title d-flex justify-content-center">
+						<h1>Activation Code</h1>
+					</div>
+				</div>
+			</div>
+			<div class="block">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="col-md-6">
+							<div class="card flex-grow-1 mb-md-0">
+								<div class="card-body">
+                                
+									<form>
+                                        <div class="form-group">
+                                            {% csrf_token %}
+                                            <label>Activation Code</label>
+                                            {{form.as_p}}
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mt-4">Send</button>
+                                    </form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- site__body / end -->
+    </form>
+{% endblock content %}

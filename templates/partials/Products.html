@@ -1,0 +1,276 @@
+{% load humanize %}                                                                                     <!----> <!-- ref3 -->
+
+{% if type == 1 %}                                                                                      <!-- type == 1 daghighan bayad ba hamin fasele neveshte beshe -->
+<div class="product-flexbox">
+    {% for product in products %}                                                                       
+        <div class="product-card" style="width: 200px !important; margin-left:12px;">
+            <div class="product-card__image">
+                <a href="{{product.get_absolute_url}}">                                                 <!----> <!-- ref1, ref1=ref2 -->
+                    <img src="{{media_url}}{{product.image_name}}" alt="">                              <!---->
+                </a>
+            </div>
+            <div class="product-card__info">
+                <div class="product-card__name">
+                    <a href="{% url 'products:ProductDetail' product.slug %}">                          <!----> <!-- ref2, ref1=ref2 -->
+                        {{product.product_name}}                                                        <!---->
+                    </a>
+                </div>
+            </div>
+            <div class="product-card__actions">
+                <!-- Availibility -->
+                {% if product.get_number_in_warehouse <= 0 %}                              <!-- ref to product model this func -->
+                    <span> Out of Stock</span>
+                {% else %}
+                    {% if product.get_price_by_discount < product.price %}
+                        <div class="product-card__prices">                                 <!-- ref3, intcomma baraye humanize hast. humanize yeki az karash comma dar 1,000,000 hast. settings => INSTALLED_APPS[] -->
+                            <del> {{product.price|intcomma}} </del> dollar                 <!---->
+                            <br>
+                            {{product.get_price_by_discount|intcomma}}                     <!---->
+                        </div>
+                    {% else %}
+                        {{product.price|intcomma}} dollar                 
+                    {% endif %}
+                {% endif %}
+                <!-- /Availibility -->
+                <!-- Compare -->
+                <div class="c1">
+                    <a onclick="addToCompareList({{product.id}},{{product.getMainProductGroup}})" class="compare2">          <!-- hrefesh ro bar midarim -->
+                        compare
+                    </a>
+                </div>
+                <!-- /Compare -->
+                <div class="product-card__buttons">
+                    <div>
+                        <button class="btn btn-primary product-card__addtocart" type="button" onclick="add_to_shop_cart({{product.id}},1)">Add To cart</button>       <!---->
+                    </div>
+                    <div>
+                        {% if user.is_authenticated %}
+                            {% if product.get_user_favorite %}
+                            <button class="btn_{{product.id}} btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button" onclick="removeFromFavorites({{product.id}})" >     <!-- calling Ajax function -->
+                                <i class="icon_{{product.id}} fa fa-heart redHeart"></i>        <!-- we used class(.) for icon_{{product.id}} because I used this favorite in two different place -->
+                                <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                            </button>
+                            {% else %}
+                            <button class="btn_{{product.id}} btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button" onclick="addToFavorites({{product.id}})">    <!-- calling Ajax function -->
+                                <i  class="icon_{{product.id}} fa fa-heart-broken"></i>     <!-- we used class(.) for icon_{{product.id}} because I used this favorite in two different place -->
+                                <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                            </button>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% elif type == 2 %}
+<div class="product-flexbox">
+    {% for product in products %}                                                                       
+        <div class="product-card" style="width: 200px !important; margin-left:12px;">
+            <div class="product-card__image">   
+                <a href="{{product.get_absolute_url}}">                                                 <!---->
+                    <img src="{{media_url}}{{product.image_name}}" alt="#">                              <!---->
+                </a>
+            </div>
+            <div class="product-card__info">
+                <div class="product-card__name">
+                    <a href="{{product.get_absolute_url}}">                                             <!---->
+                        {{product.product_name}}                                                        <!---->
+                    </a>
+                </div>
+            </div>
+            <div class="product-card__actions">
+                {% if product.get_price_by_discount < product.price %}
+                    <div class="product-card__prices">                                 
+                        <del> {{product.price|intcomma}} </del> dollar                 <!---->
+                        <br>
+                        {{product.get_price_by_discount|intcomma}}                     <!---->
+                    </div>
+                {% else %}
+                    {{product.price|intcomma}} dollar                 
+                {% endif %}
+                <div class="product-card__buttons">
+                    <button class="btn btn-primary product-card__addtocart" type="button">Add To Cart</button>
+                    <button
+                        class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
+                        type="button">
+                        <i class="fa fa-heart"></i>
+                        <span
+                            class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                    </button>
+                    <button
+                        class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
+                        type="button">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span
+                            class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% elif type == 3 %}
+<div class="product-flexbox">
+    {% for product in related_products %}                                                                       
+        <div class="product-card" style="width: 200px !important; margin-left:12px;">
+            <div class="product-card__image">   
+                <a href="{{product.get_absolute_url}}">                                                 <!---->
+                    <img src="{{media_url}}{{product.image_name}}" alt="">                              <!---->
+                </a>
+            </div>
+            <div class="product-card__info">
+                <div class="product-card__name">
+                    <a href="{{product.get_absolute_url}}">                                             <!---->
+                        {{product.product_name}}                                                        <!---->
+                    </a>
+                </div>
+            </div>
+            <div class="product-card__actions">
+                {% if product.get_price_by_discount < product.price %}
+                    <div class="product-card__prices">                                 
+                        <del> {{product.price|intcomma}} </del> dollar                 <!---->
+                        <br>
+                        {{product.get_price_by_discount|intcomma}}                     <!---->
+                    </div>
+                {% else %}
+                    {{product.price|intcomma}} dollar                 
+                {% endif %}
+                <div class="product-card__buttons">
+                    <button class="btn btn-primary product-card__addtocart" type="button">افزودن به سبد</button>
+                    <button
+                        class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
+                        type="button">
+                        <i class="fa fa-heart"></i>
+                        <span
+                            class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                    </button>
+                    <button
+                        class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
+                        type="button">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span
+                            class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% elif type == 4 %}
+{% for product in page_obj %}                                      <!-- page_obj dar har safhe 3 ta miyare. ref => views => product_per_page -->   <!---->
+<div class="products-list__item">
+    <div class="product-card">
+        <div class="product-card__badges-list">
+            <div class="product-card__badge product-card__badge--new">New</div>
+        </div>
+        <div class="product-card__image">
+            <a href="{% url 'products:ProductDetail' slug=product.slug %}">
+                <img class ="pic1" src=" {{media_url}}{{product.image_name}} " alt="">            <!---->
+            </a>
+        </div>
+        <div class="product-card__info">
+            <div class="product-card__name"><a href="{% url 'products:ProductDetail' slug=product.slug %}"> {{product.product_name}} </a></div>
+        </div>
+        <div class="product-card__actions">
+            <div class="product-card__availability">Availibility: <span class="text-success">Available</span></div>
+            <div class="product-card__prices"> {{product.price|intcomma}} $$ </div>
+            <div class="product-card__buttons">
+                <button class="btn btn-primary product-card__addtocart" type="button">Add To Cart</button>
+                <button class="btn btn-secondary product-card__addtocart product-card__addtocart--list" type="button">Add To Cart</button>
+                <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button">
+                    <svg width="16px" height="16px">
+                        <use xlink:href="images/sprite.svg#wishlist-16"></use>
+                    </svg> <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span></button>
+                <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__compare" type="button">
+                    <svg width="16px" height="16px">
+                        <use xlink:href="images/sprite.svg#compare-16"></use>
+                    </svg> <span class="fake-svg-icon fake-svg-icon--compare-16"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% elif type == 5 %}
+    {% for product in products %}
+        <div class="block-products__list-item">
+            <div class="product-card">
+                <div class="product-card__badges-list">
+                    <div class="product-card__badge product-card__badge--sale">New</div>
+                </div>
+                <div class="product-card__image">
+                    <a href="{{product.get_absolute_url}}">
+                        <img src="{{media_url}}{{product.image_name}}" alt="#">
+                    </a>
+                </div>
+                <div class="product-card__info">
+                    <div class="product-card__name">
+                        <a href="{% url 'products:ProductDetail' product.slug %}">
+                            {{product.product_name}}
+                            <div style="padding-top: 12px;">
+                                {% if product.get_number_in_warehouse <= 0 %}                              <!-- ref to product model this func -->
+                                    <span class="text-success" >Out of Stock</span>
+                                {% else %}
+                                    <span class="text-success" >Available</span>
+                                {% endif %}
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-card__actions">
+
+                    <div class="product-card__prices">
+                        {% if product.get_price_by_discount < product.price %}
+                            <span class="product-card__new-price">Price: {{product.get_price_by_discount|intcomma}}</span> 
+                            <span class="product-card__old-price">Price: {{product.price|intcomma}}$</span>
+                        {% else %}
+                            <span class="product-card__new-price">Price: {{product.price|intcomma}}$</span> 
+                        {% endif %}
+                    </div>
+                    <div class="product-card__buttons">
+                        <button class="btn btn-primary product-card__addtocart" type="button" onclick="add_to_shop_cart({{product.id}},1)">     <!---->
+                            Add To Cart
+                        </button>
+                        {% if user.is_authenticated %}
+                            {% if product.get_user_favorite %}
+                            <button class="btn_{{product.id}} btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button" onclick="removeFromFavorites({{product.id}})" >     <!-- calling Ajax function -->
+                                <i class="icon_{{product.id}} fa fa-heart redHeart"></i>    <!-- we used class(.) for icon_{{product.id}} because I used this favorite in two different place -->
+                            </button>
+                            {% else %}
+                            <button class="btn_{{product.id}} btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button" onclick="addToFavorites({{product.id}})">    <!-- calling Ajax function -->
+                                <i class="icon_{{product.id}} fa fa-heart-broken"></i>
+                            </button>
+                            {% endif %}
+                        {% endif %}
+                        <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button" onclick="add_to_shop_cart({{product.id}},1)">  <!-- calling Ajax function with add 1 product-->
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% elif type == 6 %}
+    <h4 class="widget__title">Last Products</h4>
+    <div class="widget-products__list">
+        {% for product in products %}
+            <div class="widget-products__item">
+                <div class="widget-products__image">
+                    <a href="{{product.get_absolute_url}}">
+                        <img src="{{media_url}}{{product.image_name}}" alt="#">
+                    </a>
+                </div>
+                <div class="widget-products__info">
+                    <div class="widget-products__name"><a href="{{product.get_absolute_url}}">{{product.product_name}}</a></div>
+                    <div class="widget-products__prices">{{product.price|intcomma}}$</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+        
+{% endif %} 

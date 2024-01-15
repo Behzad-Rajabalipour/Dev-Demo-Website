@@ -1,0 +1,25 @@
+{% load humanize %}
+
+<div class="widget-filters__item">
+    <div class="filter filter--opened" data-collapse-item>                                  <!-- item -->
+        <button type="button" class="filter__title" data-collapse-trigger>Price              <!-- trigger -->
+            <svg class="filter__arrow" width="12px" height="7px">
+                <use xlink:href="images/sprite.svg#arrow-rounded-down-12x7"></use>
+            </svg>
+        </button>
+        <div class="filter__body" data-collapse-content>                                     <!-- content -->
+            <div class="filter__container">
+                <span><strong id="sel_price">{{res_aggre.min|intcomma }}</strong></span><br>
+                {% comment %} {{filter.form}}  {% endcomment %}                              <!---->
+                <!-- this.value means the value of this input -->
+                <input id="inputVal" type="range" name="price" min="{{res_aggre.min}}" max="{{res_aggre.max}}"
+                 value="{{price}}" oninput="showValue(this.value)" onchange="showValue(this.value)" 
+                 style="width:100%;"> 
+                <br>
+                <span>{{res_aggre.min|intcomma}}</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="margin-left:100px;">{{res_aggre.max|intcomma}}</span>
+            </div>
+        </div>
+    </div>
+</div>

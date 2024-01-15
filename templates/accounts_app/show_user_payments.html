@@ -1,0 +1,44 @@
+{% extends 'user_panel_template.html' %}
+{% load render_partial %}
+{% load humanize %}
+
+{% block title %} User Payments  {% endblock title %}
+
+{% block content %}
+    <div class="dashboard__orders card">
+        <div class="card-header">
+            <h5>Payment List</h5>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-table">
+            <div class="table-responsive-sm">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order Id</th>
+                            <th>Payment Date</th>
+                            <th>state</th>
+                            <th>Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for payment in payments %}               <!--  objectha(recordha) ke dar model Payment hastan ro miyare -->
+                            <tr>
+                                <td>{{payment.id}}</td>
+                                <td>{{payment.register_date}}</td>
+                                <td>
+                                    {% if payment.is_finally %}
+                                        <span class="text-success">Paid</span>
+                                    {% else %}
+                                        <span class="text-danger">UnPaid</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{payment.amount|intcomma}} $</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

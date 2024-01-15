@@ -1,0 +1,7 @@
+body{
+    background-color: aquamarine;
+}
+
+#id_product_name{                               /* admin => ProductAdmin => ProductFeatureInlineAdmin. in id ro dar safheye ProductAdmin inspect zadam */
+    background-color: brown;
+}

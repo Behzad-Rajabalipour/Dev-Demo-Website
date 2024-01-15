@@ -1,0 +1,130 @@
+{% load humanize %}
+{% if shop_cart_count > 0 %}
+    <div class="site__body">
+        <div class="page-header">
+            <div class="page-header__container container">
+                <div class="page-header__breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Home</a>
+                                &nbsp; /
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Shop Cart</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="page-header__title">
+                    <h1>Shop Cart</h1></div>
+            </div>
+        </div>
+        <div class="cart block">
+            <div class="container">
+                <table class="cart__table cart-table">
+                    <thead class="cart-table__head">
+                        <tr class="cart-table__row">
+                            <th class="cart-table__column cart-table__column--image">Picture</th>
+                            <th class="cart-table__column cart-table__column--product">Product</th>
+                            <th class="cart-table__column cart-table__column--price">Price</th>
+                            <th class="cart-table__column cart-table__column--quantity">Count</th>
+                            <th class="cart-table__column cart-table__column--total">Total Price</th>
+                            <th class="cart-table__column cart-table__column--remove"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="cart-table__body">
+                        {% for item in shop_cart %}                     <!---->
+                            <tr class="cart-table__row">
+                                <td class="cart-table__column cart-table__column--image">
+                                    <a href="{{item.product.get_absolute_url}}">            <!---->
+                                        <img src="{{media_url}}{{item.product.image_name}}" alt="#">
+                                    </a>
+                                </td>
+                                <td class="cart-table__column cart-table__column--product">
+                                    <a class="cart-table__product-name" href="{{item.product.get_absolute_url}}">
+                                        {{item.product.product_name}}                               <!---->
+                                    </a>
+                                    <ul class="cart-table__options">
+                                        <li>Colors: 
+                                            {% for color in item.colors %}
+                                                {{color}} /
+                                            {% endfor %}
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td class="cart-table__column cart-table__column--price" data-title="price">
+                                    {% if item.final_price < item.price %}                      <!---->
+                                        <del>{{item.price|intcomma}}</del> <br>
+                                        {{item.final_price|intcomma}}
+                                    {% else %}
+                                        {{item.price|intcomma}}
+                                    {% endif %}
+                                    <br>
+                                </td> <!---->
+                                <td class="cart-table__column cart-table__column--quantity" data-title="count">
+                                    <div class="input-number">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <button type="button" class="btn btn-outline-secondary decrement-button">-</button>         <!-- to Ajax in tag ro peyda kardim va behehsh onclick dadim -->
+                                            </div>
+                                            <input id="item3_{{item.product.id}}" class="form-control input-number__input" type="number" min="1" value="{{item.qty}}">  <!-- ham product.id ro darim va ham tedade ro -->
+                                            <div class="input-group-append">
+                                                <button type="button" class="btn btn-outline-secondary increment-button">+</button>         <!-- to Ajax in tag ro peyda kardim va behehsh onclick dadim -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="cart-table__column cart-table__column--total" data-title="totalPrice">{{item.total_price|intcomma}}</td>  <!---->
+                                <td class="cart-table__column cart-table__column--remove">
+                                    <button type="button" class="btn btn-light btn-sm btn-svg-icon" onclick="delete_from_shop_cart({{item.product.id}})" style="cursor: pointer;"> <!---->
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="cart__actions">
+                    <div class="cart__buttons">
+                        <a class="btn btn-primary cart__update-button" onclick="update_shop_cart()" >Update ShopCart</a>          <!-- pak kardane href, agarna safhe refresh mishe -->
+                    </div>
+                </div>
+                <div class="row justify-content-end pt-5">
+                    <div class="col-12 col-md-7 col-lg-6 col-xl-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Cart Summary</h3>
+                                <table class="cart__totals">
+                                    <thead class="cart__totals-header">
+                                        <tr>
+                                            <th>Price</th>
+                                            <td>{{total_price|intcomma}} $</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="cart__totals-body">
+                                        <tr>
+                                            <th>Delivery</th>
+                                        <td>{{delivery|intcomma}} $</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tax</th>
+                                            <td>{{tax|intcomma}} $</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot class="cart__totals-footer">
+                                        <tr>
+                                            <th>Total Price</th>
+                                            <td>{{order_final_price|intcomma}} $</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <a class="btn btn-primary btn-xl btn-block cart__checkout-button" href="{% url 'orders:create_order' %}">Continue</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <h2>Shop Cart is Empty</h2>
+{% endif %}
+</table> 

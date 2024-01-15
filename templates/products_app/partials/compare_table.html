@@ -1,0 +1,42 @@
+{% if products %}
+    <div class="container">
+        <h2 style="text-align: center; color: reen;">Compare Products</h2>
+        <table class="table table-bordered">
+            <!-- Th -->
+            <tr style="background: #f1f1f1; text-align:center;">
+                <th>Product Features</th>
+                {% for product in products %}
+                    <th>
+                        <i class="fa fa-times product-remove" onclick="deleteFromCompareList({{product.id}})"></i>       <!---->
+                        {{product.product_name}}
+                    </th>
+                {% endfor %}
+            </tr>
+            <!-- /Th-->
+
+            <!-- Td -->
+            {% for feature in features %}
+                <tr>                                                        
+                    <td style="font-size:1.2rem; font-weight:900; width: 25%;">
+                        {{feature}}                                                 <!-- def __str__(self) miyad self.feature_name ro chap mikone-->
+                    </td>
+
+                    {% for product in products %}
+                        <td style="text-align:center;">
+                            {% for ProductFeature in product.product_features.all %}      <!-- ManyToMany. Product => ProductFeature(table) => product_features. ProductFeature haro miyare -->
+                                {% if ProductFeature.feature == feature %}
+                                    <span style="margin:5px;"> {{ProductFeature.filter_value.value_title}} </span>            <!---->
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            <!-- /Td -->
+        </table>
+    </div>
+{% else %}
+    <div class="container">
+        <h2 style="text-align:center; color:green; padding: 100px;"> There is no product to compare</h2>
+    </div>
+{% endif %}
