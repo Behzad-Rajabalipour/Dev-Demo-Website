@@ -36,16 +36,18 @@ class UserChangeForm(forms.ModelForm):
 
 #--------------------------------------------------------------------------    
 class RegisterUserForm(forms.ModelForm):
-    password1=forms.CharField(label="Password",widget=forms.PasswordInput(attrs={"class":"form-control","placeholder":"Enter your Password"}))
-    password2=forms.CharField(label="Repeat Password",widget=forms.PasswordInput(attrs={"class":"form-control","placeholder":"Enter your Repeat Password"}))
-
     class Meta:
         model=CustomUser            
-        fields=["mobile_number"]                                    # label bayad to model verbose_name behesh bedi
+        fields=["mobile_number","name","family","email"]                                    # label bayad to model verbose_name behesh bedi
         widgets={                                                   # chon class Meta hast injuri widgets midim
-            "mobile_number":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Mobile Number"})
-        }
-        
+            "mobile_number":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Mobile Number"}),
+            "name":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Your Name"}),
+            "family":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Your Family"}),
+            "email":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Your Email"})
+        }    
+    password1=forms.CharField(label="Password",widget=forms.PasswordInput(attrs={"class":"form-control","placeholder":"Enter your Password"}))
+    password2=forms.CharField(label="Repeat Password",widget=forms.PasswordInput(attrs={"class":"form-control","placeholder":"Enter your Repeat Password"}))
+    
     def clean_password2(self):                            
         pass1=self.cleaned_data["password1"]
         pass2=self.cleaned_data["password2"]
@@ -102,23 +104,23 @@ class UpdateProfileForm(forms.Form):
     
     name=forms.CharField(label="",
                                   error_messages={'required':"this field can not be empty"},
-                                  widget=forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Mobile"}))
+                                  widget=forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Name"}))
     
     family=forms.CharField(label="",
                                   error_messages={'required':"this field can not be empty"},
-                                  widget=forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Mobile"}))
+                                  widget=forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Family"}))
     
     email=forms.CharField(label="",
                                   error_messages={'required':"this field can not be empty"},
-                                  widget=forms.EmailInput(attrs={"class":"form-control","placeholder":"Enter Mobile"}))
+                                  widget=forms.EmailInput(attrs={"class":"form-control","placeholder":"Enter Email"}))
     
     phone_number=forms.CharField(label="",
                                   error_messages={'required':"this field can not be empty"},
-                                  widget=forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Mobile"}))
+                                  widget=forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Phone Number"}))
     
     address=forms.CharField(label="",
                                   error_messages={'required':"this field can not be empty"},
-                                  widget=forms.Textarea(attrs={"class":"form-control","placeholder":"Enter Mobile"}))
+                                  widget=forms.Textarea(attrs={"class":"form-control","placeholder":"Enter Address"}))
     
     image=forms.ImageField(required=False)
     

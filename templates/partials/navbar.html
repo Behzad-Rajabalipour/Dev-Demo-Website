@@ -1,22 +1,22 @@
         <!-- .topbar / end -->
         <div class="site-header__nav-panel">
             <div class="nav-panel">
-                <div class="nav-panel__container container">
-                    <div class="nav-panel__row">
+                <div class="nav-panel__container container d-flex d-xl-block d-lg-block d-md-block d-sm-flex" style=" justify-content: center;">
+                    <div class="nav-panel__row ">
                         <div class="nav-panel__logo">
                             <a href="index.html">
-                                <img src="images/shopLogo.png" alt="">
+                                <img src="{{media}}logo/behzad.png" alt="">
                             </a>
                         </div>
                         <!-- .nav-links -->
-                        <div class="nav-panel__nav-links nav-links">
+                        <div class="nav-panel__nav-links nav-links m-auto">
                             <ul class="nav-links__list">
                                 <li class="nav-links__item nav-links__item--with-submenu">
                                     <a href=" {% url "main:index" %}">                              <!---->
-                                        <span><i class="fa fa-home"></i>&nbsp; Home</span>
+                                        <span><i class="fa fa-home"></i> <span class="d-inline d-sm-none">&nbsp;</span> Home</span>
                                     </a>
                                 </li>
-                                <li class="nav-links__item nav-links__item--with-submenu">
+                                {% comment %} <li class="nav-links__item nav-links__item--with-submenu">
                                     <a href="product-categories.html">
                                         <span>
                                             Product Categories
@@ -140,42 +140,46 @@
                                         </div>
                                         <!-- .megamenu / end -->
                                     </div>
-                                </li>
+                                </li> {% endcomment %}
 
-                                <li class="nav-links__item nav-links__item--with-submenu">
-                                    <a href="#">
-                                        <span>
-                                            Profile &nbsp;<i class="fa fa-angle-down"></i>
-                                        </span>
-                                    </a>
-                                    <div class="nav-links__menu">
-                                        <!-- .menu -->
-                                        {% if user.is_authenticated %}                                                              <!-- is_authenticated ro inja midim -->
-                                            <ul class="menu menu--layout--classic">
-                                                <li><a href="{% url 'accounts:logout' %}">logout</a></li>
-                                            </ul>
-                                            
-                                        {% else %}
-                                        
-                                            <ul class="menu menu--layout--classic">
-                                                <li><a href="{% url 'accounts:login' %}">Login</a></li>
-                                                <li><a href="{% url 'accounts:register' %}">Register</a></li>
-                                            </ul>
-                                        {% endif %}
-
-                                        <!-- .menu / end -->
-                                    </div>
-                                </li>
-                                <li class="nav-links__item nav-links__item--with-submenu">
-                                    <a href="blog.html">
-                                        <span><i class="fa fa-newspaper"></i>&nbsp; Blog</span>
-                                    </a>
-                                </li>
+                                <!-- .menu -->
+                                {% if user.is_authenticated %}                                                              <!-- is_authenticated ro inja midim -->
+                                    <li class="nav-links__item nav-links__item--with-submenu">
+                                        <a href="{% url 'accounts:logout' %}">
+                                            <span><i class="fa fa-home"></i>&nbsp; Logout</span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="nav-links__item nav-links__item--with-submenu">
+                                        <a href="{% url 'accounts:register' %}"><span>Register</span></a>
+                                    </li>
+                                    <li class="nav-links__item nav-links__item--with-submenu">
+                                        <a href="{% url 'accounts:login' %}"><span>Login</span></a>
+                                    </li>
+                                {% endif %}
                             </ul>
+
+                                {% comment %} <div class="nav-links__menu">
+                                    <!-- .menu -->
+                                    {% if user.is_authenticated %}                                                              <!-- is_authenticated ro inja midim -->
+                                        <ul class="menu menu--layout--classic">
+                                            <li><a href="{% url 'accounts:logout' %}">logout</a></li>
+                                        </ul>
+                                        
+                                    {% else %}
+                                    
+                                        <ul class="menu menu--layout--classic">
+                                            <li><a href="{% url 'accounts:login' %}">Login</a></li>
+                                            <li><a href="{% url 'accounts:register' %}">Register</a></li>
+                                        </ul>
+                                    {% endif %}
+
+                                    <!-- .menu / end -->
+                                </div> {% endcomment %}
                         </div>
 
                         <!-- .nav-links / end -->
-                        <div class="nav-panel__indicators">
+                        <div class="nav-panel__indicators m-auto">
                             <div class="indicator indicator--trigger--click">
                                 <button type="button" class="indicator__button">
                                     <span class="indicator__area">
@@ -202,15 +206,16 @@
                                     </span>
                                 </a>
                             </div>
-                            <div class="indicator">
-                                <a href="{% url 'orders:shop_cart' %}" class="indicator__button">   <!-- url means  templates => orders_app => shop_cart.html -->
-                                    <span class="indicator__area">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        <span class="indicator__value" id="indicator__value">0</span>       <!---->
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="indicator" id="compare_count_icon">
+                            <div class="d-none d-xl-block d-lg-block d-md-block d-sm-block m-auto">
+                                <div class="indicator">
+                                    <a href="{% url 'orders:shop_cart' %}" class="indicator__button">   <!-- url means  templates => orders_app => shop_cart.html -->
+                                        <span class="indicator__area">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span class="indicator__value" id="indicator__value">0</span>       <!---->
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="indicator" id="compare_count_icon">
                                 <a href="{% url 'products:compare_list' %}" class="indicator__button">
                                     <span class="indicator__area">
                                         <i class="fa fa-play"></i>
@@ -218,9 +223,11 @@
                                     </span>
                                 </a>
                             </div>
+                        </div>
 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        

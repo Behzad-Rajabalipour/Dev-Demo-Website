@@ -1,4 +1,4 @@
-<header class="site__header d-lg-block d-none">
+<header class="site__header d-lg-block d-md-block d-sm-block">
     <div class="site-header">
         <!-- .topbar -->
         <div class="site-header__topbar topbar">
@@ -26,13 +26,13 @@
         <div class="site-header__middle container">
             <div class="site-header__logo">
                 <a href="index.html" >
-                    <img src="/media/images/behzad.png" alt="#" class="img-180x50">    <!-- src="/" don't forget / at the begining -->
+                    <img src="{{media_url}}logo/behzad.png" alt="#" class="img-180x50">    <!-- src="/" don't forget / at the begining -->
                 </a>
             </div>
 
-            <div class="site-header__search">
+            <div class="site-header__search d-lg-block d-md-block d-none">
                 <div class="search">
-                    <form class="search__form" action="{% url 'search:search_view' %}" method="GET">
+                    <form class="search__form m-auto" action="{% url 'search:search_view' %}" method="GET">
                         <input class="search__input" name="q" placeholder="Search Product"
                             aria-label="Site search" type="text" autocomplete="off">            <!-- name="q" -->
                         <button class="search__button" type="submit">
@@ -42,7 +42,7 @@
                     </form>
                 </div>
             </div>
-            <div class="site-header__phone">
+            <div class="site-header__phone d-lg-block d-md-block d-none">
                 <div class="site-header__phone-title">IT</div>
                 <div class="site-header__phone-number"><span class="ltr_text">604-857-6985</span></div>
             </div>

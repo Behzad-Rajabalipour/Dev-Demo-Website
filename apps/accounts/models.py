@@ -58,8 +58,6 @@ class CustomUserManager(UserManager):
         user.save()
         return user
     
-    
-    
 # ============================part 1
 
 # in modele User ma hast, in modele paye hast ke CustomUserManager() rosh run mishe

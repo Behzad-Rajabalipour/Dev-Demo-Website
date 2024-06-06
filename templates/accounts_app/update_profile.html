@@ -1,4 +1,4 @@
-    {% extends 'user_panel_template.html' %}
+{% extends 'user_panel_template.html' %}
 {% load render_partial %}
 
 {% block title %} Update Profile  {% endblock title %}
@@ -16,12 +16,12 @@
                     <div class="card-divider"></div>
                     
                     <div class="card-body">
-                        <form action="" method="post" enctype="multipart/form-data">     <!-- age action="" khali bashe bar migardune be hamun address ke omade. enctype baraye ersal file(image) bud -->
+                        <form action="" method="POST" enctype="multipart/form-data">     <!-- age action="" khali bashe bar migardune be hamun address ke omade. enctype baraye ersal file(image) bud -->
                             {% csrf_token %}    
                             {{form.as_p}}                           <!---->
                             <img src="{{media_url}}{{image_url}}" style="width: 100px; height: 100px;" alt="image">     <!---->
                             <div class="form-group">                                            
-                                <button type="submit" class="btn btn-primary mt-4">Edit</button>                        <!---->
+                                <button type="submit" class="btn btn-primary mt-4">Save</button>                        <!---->
                                 <a href="{% url 'accounts:userpanel' %}" class="btn btn-info mt-4">Cancel</a>           <!---->
                             </div>
                         </form>

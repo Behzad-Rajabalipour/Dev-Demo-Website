@@ -24,11 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-5&xh*gqqmdk)wg36qw5oy5yvmv70&o2$po0w$2#zh4v17q*vz#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-ALLOWED_HOSTS = []
+# DEBUG = 
+# ALLOWED_HOSTS = ['*']
 
-# DEBUG = False                       # vaghti DEBUG false mishe dige error haro neshun nemide, page maro neshun mide. shop.py => urls.py => handler404. in baraye akhar kar ke project amade shod hast
-# ALLOWED_HOSTS = ['*']               
+DEBUG = True                       # vaghti DEBUG false mishe dige error haro neshun nemide, page maro neshun mide. shop.py => urls.py => handler404. in baraye akhar kar ke project amade shod hast
+ALLOWED_HOSTS = ['*']               
 
 
 
@@ -91,18 +91,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'shop.wsgi.application'
 
+# trusted origin
+CSRF_TRUSTED_ORIGINS = [
+    'https://behzad-website.ca',
+    # Add other trusted origins as needed
+]
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql.connector.django',
-        'NAME': "database1",
-        "USER": "admin",
-        "PASSWORD":"R4k_hector$",
-        "HOST":"database-1.cfgce6640pvz.us-east-1.rds.amazonaws.com",
-        "PORT":"3306",
+        'ENGINE': '#',
+        'NAME': "#",
+        "USER": "#",
+        "PASSWORD":"#",
+        "HOST":"#",
+        "PORT":"#",
         'OPTIONS': {
             'charset': 'utf8mb4',
         },
@@ -149,14 +154,13 @@ USE_TZ = False
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static/"),)
-
-
-
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'    # age in ro active konim, static file ha mesle CSS va JS ro az amazon S3 migire. 
+                                                                      # yani age to S3, file CSS ndashte bashim, website ba html khali ejra mishe
 # Use Amazon S3 for storage for uploaded media files.
-AWS_STORAGE_BUCKET_NAME = 'behzad-django-bucket'
-AWS_ACCESS_KEY_ID = 'AKIAQLQCH7CVJQKEAY7F'
-AWS_SECRET_ACCESS_KEY = 'HfO8EmMv1/NbGtkX/A+oaitrvQ7sBG3E3UQCWRqG'
-AWS_S3_REGION_NAME = 'us-east-1'  # e.g., 'us-east-1'
+AWS_STORAGE_BUCKET_NAME = '#'
+AWS_ACCESS_KEY_ID = '#'
+AWS_SECRET_ACCESS_KEY = '#'
+AWS_S3_REGION_NAME = '#'  # e.g., 'us-east-1'
 
 # Use Amazon S3 for storage for uploaded media files.
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
@@ -165,7 +169,6 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 MEDIA_URL = 'https://%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
 # MEDIA_URL = "media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

@@ -9,20 +9,20 @@ def create_random_code(count):
 # 1. Install kavenegar module    
 # 2. copy Python code az kavenegar site
 
-from kavenegar import *
-def send_sms(mobile_number, message):
+from twilio.rest import Client
+def send_sms(mobile_number, active_code):
         try:
-                api = KavenegarAPI('{Your APIKey}')                                             # API code bade kharide account inja mizari
-                params = {
-                        'sender': '10004346',                                                   # mobile number sender hast 
-                        'receptor': mobile_number,                                              # mobile number receiver hast
-                        'message': message                                                      # matne message hast
-                }   
-                response = api.sms_send(params)
-                print (str(response))
-        except APIException as error: 
-                print (str(error))
-        except HTTPException as error: 
+                account_sid = '#'
+                auth_token = '#'
+                client = Client(account_sid, auth_token)
+
+                message = client.messages.create(
+                        from_='#',
+                        body=f'Your Activation Code: {active_code}',
+                        to=f'+1{mobile_number}'
+                )
+                print(message.sid)
+        except Exception as error: 
                 print (str(error))
                 
 #-------------------------------------------------------------------
@@ -35,7 +35,8 @@ class FileUpload:
                 
         def upload_to(self,instance,filename):
                 filename, ext=os.path.splitext(filename)
-                return f"{self.dir}/{self.secondDir}/{uuid4}{ext}"              # baes mishe to db esme hich aksi yeksan nabashe
+                # return f"{self.dir}/{self.secondDir}/{uuid4}{ext}"       # baes mishe to db esme hich aksi yeksan nabashe
+                return f"media/images/customer/{uuid4}{ext}"               # 
                
 #-------------------------------------------------------------------
 # in code chon ziyad tekrar shode inja minevisim

@@ -4,11 +4,14 @@ from django.views import View
 from .models import Slider
 from django.db.models import Q
 
+counter = 0
 def media_admin(request):
     return {"media_url":settings.MEDIA_URL}
 
 def index(request):
-    return render(request,"main_app/index.html")
+    global counter
+    counter += 1
+    return render(request,"main_app/index.html",{'counter': counter})
 
 
 class SliderView(View):

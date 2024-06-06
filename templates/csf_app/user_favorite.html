@@ -16,15 +16,15 @@
 					<div class="page-header__breadcrumb">
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="index.html">خانه</a>
+								<li class="breadcrumb-item"><a href="index.html">Home</a>
 									/
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">علاقه‌مندی‌ها</li>
+								<li class="breadcrumb-item active" aria-current="page">Favorites</li>
 							</ol>
 						</nav>
 					</div>
 					<div class="page-header__title">
-						<h1>علاقه‌مندی‌ها</h1></div>
+						<h1>Favorites</h1></div>
 				</div>
 			</div>
 			<div class="block">
@@ -32,10 +32,10 @@
 					<table class="wishlist">
 						<thead class="wishlist__head">
 							<tr class="wishlist__row">
-								<th class="wishlist__column wishlist__column--image">تصویر</th>
-								<th class="wishlist__column wishlist__column--product">محصول</th>
-								<th class="wishlist__column wishlist__column--stock">وضعیت انبار</th>
-								<th class="wishlist__column wishlist__column--price">قیمت</th>
+								<th class="wishlist__column wishlist__column--image">Image</th>
+								<th class="wishlist__column wishlist__column--product">Product</th>
+								<th class="wishlist__column wishlist__column--stock">Avalability</th>
+								<th class="wishlist__column wishlist__column--price">Price</th>
 								<th class="wishlist__column wishlist__column--tocart"></th>
 								<th class="wishlist__column wishlist__column--remove"></th>
 							</tr>
@@ -53,17 +53,17 @@
                                     </td>
                                     <td class="wishlist__column wishlist__column--stock">
                                         {% if favorite.product.get_number_in_warehouse > 0 %}           <!---->
-                                            <div class="badge badge-success">موجود در انبار</div>
+                                            <div class="badge badge-success">Availability</div>
                                         {% else %}
-                                            <div class="badge badge-danger">نا موجود در انبار</div>
+                                            <div class="badge badge-danger">Not available</div>
                                         {% endif %}
                                     </td>
                                     <td class="wishlist__column wishlist__column--price">{{favorite.product.price}}</td>        <!---->
                                     <td class="wishlist__column wishlist__column--tocart">
                                         {% if favorite.product.get_number_in_warehouse > 0 %}
-                                            <button type="button" class="btn btn-primary btn-sm" onclick="add_to_shop_cart({{favorite.product.id}},1)">افزودن به سبد</button>    <!---->
+                                            <button type="button" class="btn btn-primary btn-sm" onclick="add_to_shop_cart({{favorite.product.id}},1)">Add to favorite</button>    <!---->
                                         {% else %} 
-                                            <button type="button" class="btn btn-primary btn-sm disabled" >افزودن به سبد</button>        <!---->
+                                            <button type="button" class="btn btn-primary btn-sm disabled" >Add to shopCart</button>        <!---->
                                         {% endif %}
                                     </td>
                                     <td class="wishlist__column wishlist__column--remove">

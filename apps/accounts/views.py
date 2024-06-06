@@ -10,7 +10,6 @@ from apps.orders.models import Order
 from apps.payments.models import Payment
 from django.contrib.auth.decorators import login_required
 
-
 # to view process anjam mishe
 
 #=====================================================================================
@@ -26,7 +25,7 @@ class RegisterUserView(View):
     def get(self, request, *args, **kwargs):                    # templates get mikone az inja
         form=RegisterUserForm()
         return render(request,self.template_name,{"form":form})
-        
+    
     def post(self, request, *args, **kwargs):                   # templates post mikone be inja
         form=RegisterUserForm(request.POST)
         
@@ -35,17 +34,23 @@ class RegisterUserView(View):
             active_code= utils.create_random_code(5)
             CustomUser.objects.create_user(
                 mobile_number=data["mobile_number"],
+                email=data["email"],
+                name=data["name"],
+                family=data["family"],
                 active_code=active_code,
-                password=data["password1"]
+                password=data["password1"],
             )
-            utils.send_sms(data["mobile_number"],f"you activation code is {active_code}")           # baraye user sms mire
+            
+            utils.send_sms(data["mobile_number"],f"{active_code}")           # baraye user sms mire
                                                                                 
             request.session["user_session"]={                                   # session ha fazayi dar server budan ke mitunestim data tosh zakhire konim. sakhte session be esme user_session
                 "active_code":str(active_code),
-                "mobile_number":data["mobile_number"]
+                "mobile_number":data["mobile_number"],
+                "password":data["password1"],
             }
             
             messages.success(request,"Your information is saved. Please enter activation code","success")
+            
             return redirect("accounts:verify")                                  # inja mibarash safheye Verify baraye vared kardane active_code
         messages.error(request,"Input data is not correct","danger")
         return render(request,self.template_name,{"form":form})
@@ -74,6 +79,8 @@ class VerifyRegisterCodeView(View):
                 user.active_code=utils.create_random_code(5)                                    # vaghti True shod active_code esh ro avaz kon
                 user.save()
                 messages.success(request,"You are registered","success")
+                user=authenticate(username=user_session["mobile_number"],password=user_session["password"])
+                login(request,user) 
                 return redirect("main:index")
             else:
                 messages.error(request,"activation code is wrong","danger")
@@ -239,7 +246,7 @@ class UserPanelView(LoginRequiredMixin,View):                                   
                 "name":user.name,
                 "family":user.family,
                 "email":user.email,
-                "phone_number":customer.phone_number,
+                "phone_number":user.mobile_number,
                 "address":customer.address,
                 "image":customer.image_name,
             }
@@ -248,6 +255,7 @@ class UserPanelView(LoginRequiredMixin,View):                                   
                 "name":user.name,
                 "family":user.family,
                 "email":user.email,
+                "phone_number":user.mobile_number,
             }
         return render(request,"accounts_app/userpanel.html", {"user_info":user_info})
 
@@ -268,20 +276,20 @@ class UpdateProfileView(LoginRequiredMixin,View):
                 "name":user.name,
                 "family":user.family,
                 "email":user.email,
-                "phone_number":customer.phone_number,
                 "address":customer.address,
             }
         except:
             user_info={                                                         
+                "mobile_number":user.mobile_number,
                 "name":user.name,
                 "family":user.family,
                 "email":user.email,
             }
         
         form=UpdateProfileForm(initial=user_info)                                    # formi ke por hast ro mifreste. faghat name to form ba "name" to user_info bayad yeki bashe
-        return render(request,"accounts_app/update_profile.html", {"form":form,"image_url":customer.image_name})
+        return render(request,"accounts_app/update_profile.html",{"form":form,"image_url":customer.image_name})
     
-    def post(self,request):
+    def post(self,request):    
         form=UpdateProfileForm(request.POST,request.FILES)
         
         if form.is_valid():
@@ -295,10 +303,11 @@ class UpdateProfileView(LoginRequiredMixin,View):
                 customer=Customer.objects.get(user=request.user)
                 customer.phone_number=cd['phone_number']
                 customer.address=cd['address']
+                print("ssss",cd['image'])
                 if cd['image']:
                     customer.image_name=cd['image']
                 customer.save()
-            except:
+            except Exception:
                 Customer.objects.create(
                     user=request.user,
                     phone_number=cd['phone_number'],
@@ -309,6 +318,7 @@ class UpdateProfileView(LoginRequiredMixin,View):
             return redirect("accounts:userpanel")
         
         else:
+            
             messages.error(request,'data is not valid','danger')
             return render("accounts_app/update_profile.html",{'form':form})
             
