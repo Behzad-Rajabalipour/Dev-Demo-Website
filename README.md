@@ -69,6 +69,6 @@ To run the application using Docker:
 Contributions are welcome! Please submit a pull request or open an issue for any bugs or feature requests.
 
 ## License
-This project is licensed under the MIT License.
+This project is done by Behzad Rjabalipour as a sample website.
  
  
