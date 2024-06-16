@@ -68,7 +68,4 @@ To run the application using Docker:
 ## Contributing
 Contributions are welcome! Please submit a pull request or open an issue for any bugs or feature requests.
 
-## License
-This project is done by Behzad Rjabalipour as a sample website.
- 
  
