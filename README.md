@@ -1,6 +1,11 @@
 # Dev Demo Website (Django)
 
-This repository contains the code for a demo website built with Django. The website is currently live at [behzaddevdemo.com](https://behzaddevdemo.com).
+•	It has features including: likes, comments, ratings comparison, admin panel, user panel, upload and download functionality and multi-factor authentication (MFA).
+•	It has e-commerce components including: shopping cart, quick view, checkout page, coupons and discounts.
+•	It implemented on AWS server and Utilized EC2 instances, Load Balancer, S3, SNS, RDS for MySQL.
+•	Integrated with third-party APIs in JSON format. Utilized Ajax requests to send and receive data from third-party APIs.
+
+        Django – JS – Ajax – Html – CSS – Bootstrap – JSON (JWT)– MySQL – AWS S3 – AWS RDS (MySQL) – AWS EC2 
 
 ## Table of Contents
 - [Features](#features)
