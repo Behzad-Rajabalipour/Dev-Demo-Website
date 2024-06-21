@@ -1,9 +1,9 @@
 # Dev Demo Website (Django)
 
 •	It has features including: likes, comments, ratings comparison, admin panel, user panel, upload and download functionality and multi-factor authentication (MFA). <br/>
-•	It has e-commerce components including: shopping cart, quick view, checkout page, coupons and discounts.
-•	It implemented on AWS server and Utilized EC2 instances, Load Balancer, S3, SNS, RDS for MySQL.
-•	Integrated with third-party APIs in JSON format. Utilized Ajax requests to send and receive data from third-party APIs.
+•	It has e-commerce components including: shopping cart, quick view, checkout page, coupons and discounts. <br/>
+•	It implemented on AWS server and Utilized EC2 instances, Load Balancer, S3, SNS, RDS for MySQL. <br/>
+•	Integrated with third-party APIs in JSON format. Utilized Ajax requests to send and receive data from third-party APIs. <br/>
 
         Django – JS – Ajax – Html – CSS – Bootstrap – JSON (JWT)– MySQL – AWS S3 – AWS RDS (MySQL) – AWS EC2 
 
