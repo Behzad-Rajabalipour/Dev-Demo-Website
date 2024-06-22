@@ -1,5 +1,6 @@
 # Dev Demo Website (Django)
 ## Description
+You can register to the website to access all its features.
 •	It has features including: likes, comments, ratings comparison, admin panel, user panel, upload and download functionality and multi-factor authentication (MFA). <br/>
 •	It has e-commerce components including: shopping cart, quick view, checkout page, coupons and discounts. <br/>
 •	It implemented on AWS server and Utilized EC2 instances, Load Balancer, S3, SNS, RDS for MySQL. <br/>
